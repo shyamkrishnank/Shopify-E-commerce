@@ -1,0 +1,58 @@
+import React from 'react'
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Avatar} from "@nextui-org/react";
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem,User} from "@nextui-org/react";
+import {Image} from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../Slices/AuthSlice';
+
+function UserNav() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const handleLogout = () =>{
+    localStorage.removeItem('auth_token')
+    dispatch(logout())
+    navigate('/')
+
+  }
+
+  return (
+    <div className='my-2 drop-shadow-xl'>
+    <Navbar>
+      <NavbarBrand>
+        <Image
+        className='hover:cursor-pointer'
+        onClick={()=>navigate('/')}
+        width={60}
+        src='/spotifyLogo.png'
+         />
+      </NavbarBrand>
+      <NavbarContent justify="end">
+        <NavbarItem>
+        <Dropdown placement="bottom-end">
+        <DropdownTrigger>
+          <Avatar
+            isBordered
+            as="button"
+            className="transition-transform"
+            src=""
+          />
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Profile Actions" variant="flat">
+         <DropdownItem  key="profile" color="success">
+            My Profile
+          </DropdownItem>
+          <DropdownItem onClick={handleLogout} key="logout" color="danger">
+            Log Out
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+      </NavbarItem>
+      </NavbarContent>
+    </Navbar>   
+    </div>
+  )
+}
+
+export default UserNav
