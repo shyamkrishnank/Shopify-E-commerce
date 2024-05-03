@@ -29,9 +29,15 @@ class LoginView(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
         data = request.data
-        user = authenticate(username=data['username'], password=data['password'])
-        if user is not None:
-            token = get_tokens_for_user(user)
-            return Response({'message': 'Successfully Logged In', 'tokens': token}, status=status.HTTP_202_ACCEPTED)
-        else:
-            return Response({'message': 'Invalid Credentials'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        try:
+            user = authenticate(username=data['username'], password=data['password'])
+            if user is not None:
+                token = get_tokens_for_user(user)
+                if user.is_superuser:
+                    return Response({'message': 'Successfully Logged In', 'tokens': token, 'is_admin': True}, status=status.HTTP_202_ACCEPTED)
+                else:
+                    return Response({'message': 'Successfully Logged In', 'tokens':token, 'is_admin': False }, status=status.HTTP_202_ACCEPTED)
+            else:
+                return Response({'message': 'Invalid Credentials'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        except:
+            return Response({'message': 'Please fill all fileds'}, status=status.HTTP_400_BAD_REQUEST)

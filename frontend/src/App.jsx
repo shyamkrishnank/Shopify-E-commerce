@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import AuthRoute from './components/auth/AuthRoute'
 import InitialHome from './components/pages/Home/InitialHome'
+import ProtectedAdminRoute from './components/auth/ProtectedAdminRoute'
+import AdminHome from './components/pages/Admin/AdminHome'
 
 function App() {
 
@@ -28,7 +30,11 @@ function App() {
           <Route path='/user' element={<InitialHome />}>
           </Route>
         </Route>
+        <Route element={<ProtectedAdminRoute/>}>
+          <Route path='/admin' element={<AdminHome/>}>
 
+          </Route>
+        </Route>
       </Routes>
     </Router>
     <ToastContainer />

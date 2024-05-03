@@ -18,6 +18,7 @@ axiosInstance.interceptors.response.use((response)=>{
         const token = response.data.tokens
         console.log(response.data)
         localStorage.setItem('auth_token',JSON.stringify(token))
+        response.data.is_admin?localStorage.setItem('is_admin',response.data.is_admin):null
         axiosInstance.defaults.headers['Authorization'] = `Bearer ${response.data.tokens.access}`
         return response
     }
