@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../Slices/AuthSlice';
 
-function UserNav() {
+function AdminNav() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -37,7 +37,7 @@ function UserNav() {
             isBordered
             as="button"
             className="transition-transform"
-            src=""
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREQDk8Prqa_VO6KuoRG-skFuc8uhdJZ9ZLCsfnzy0PMA&s"
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
@@ -56,4 +56,4 @@ function UserNav() {
   )
 }
 
-export default UserNav
+export default AdminNav

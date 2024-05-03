@@ -31,7 +31,7 @@ function LoginForm() {
         progress: undefined,
         theme: "colored",
         });
-       navigate('/user/home')
+       navigate('/user')
     })
     .catch(error=>{
       console.log(error)
@@ -62,8 +62,8 @@ function LoginForm() {
                         <div className='flex justify-center'>
                         <Button onClick={handleSubmit} color="success" variant="bordered">
                          Submit
-                        </Button>       
-                        </div>
+                        </Button>
+                        </div>                         
                         </div>
                       </div>
                     </div>

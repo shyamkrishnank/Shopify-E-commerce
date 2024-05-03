@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 
-
-const ProtectedRoute = () => {
+const ProtectedAdminRoute = ()=> {
     const isLogged = useSelector(state=>state.auth.isLogged)
     const is_admin = useSelector(state=>state.auth.is_admin)
 return (
-    isLogged ?is_admin?<Navigate to='/admin'/>:<Outlet/> :<Navigate to='/login'/>
+    isLogged ? is_admin ? <Outlet/>:<Navigate to='/admin'/>:<Navigate to='/login'/>
   )
 }
 
-export default ProtectedRoute
+
+export default ProtectedAdminRoute
