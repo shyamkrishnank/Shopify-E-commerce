@@ -1,5 +1,6 @@
 .idea
 env
 frontend/node_modules
-backend\db.sqlite3
+backend/db.sqlite3
 migrations/*
+backend/media

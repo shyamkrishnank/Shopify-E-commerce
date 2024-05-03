@@ -11,6 +11,8 @@ import AuthRoute from './components/auth/AuthRoute'
 import InitialHome from './components/pages/Home/InitialHome'
 import ProtectedAdminRoute from './components/auth/ProtectedAdminRoute'
 import AdminHome from './components/pages/Admin/AdminHome'
+import AdminSport from './components/pages/Admin/AdminSport'
+import AdminInitial from './components/pages/Admin/AdminInitial'
 
 function App() {
 
@@ -31,7 +33,9 @@ function App() {
           </Route>
         </Route>
         <Route element={<ProtectedAdminRoute/>}>
-          <Route path='/admin' element={<AdminHome/>}>
+          <Route path='/admin' element={<AdminInitial />} >
+            <Route index element={<AdminHome />}/>
+             <Route path='sportscategory' element={<AdminSport/>}/>
 
           </Route>
         </Route>
