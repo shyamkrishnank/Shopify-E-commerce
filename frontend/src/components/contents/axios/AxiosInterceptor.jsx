@@ -26,16 +26,6 @@ axiosInstance.interceptors.response.use((response)=>{
 
 },
 (error)=>{
-    toast.error(`${error.response.data.message}`, {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "colored",
-        });
         return Promise.reject(error)
 }
 )
