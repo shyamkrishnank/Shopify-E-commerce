@@ -1,5 +1,5 @@
 import React from 'react'
-import UserNav from '../../contents/Home/UserNav'
+import UserNav from '../../contents/User/UserNav'
 import { Outlet } from 'react-router-dom'
 
 function InitialHome() {

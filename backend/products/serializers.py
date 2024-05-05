@@ -15,6 +15,16 @@ class CategorySerializer(ModelSerializer):
 
 
 class ProductSerializer(ModelSerializer):
+    category = CategorySerializer(read_only=True)
     class Meta:
         model = Products
         fields = '__all__'
+
+
+#for user
+
+
+class ProductBasicDetailsSerializer(ModelSerializer):
+    class Meta:
+        model = Products
+        fields = ['id','title','price','stock','image1']
