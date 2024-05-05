@@ -5,6 +5,7 @@ import {Image} from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../Slices/AuthSlice';
+import { axiosInstance } from '../axios/AxiosInterceptor';
 
 function AdminNav() {
   const navigate = useNavigate()
@@ -13,6 +14,8 @@ function AdminNav() {
   const handleLogout = () =>{
     localStorage.removeItem('auth_token')
     localStorage.removeItem('is_admin')
+    axiosInstance.defaults.headers['Authorization'] = null
+    axiosInstance.defaults.headers['Refresh-token'] = null
     dispatch(logout())
     navigate('/')
 

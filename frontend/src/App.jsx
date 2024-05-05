@@ -13,6 +13,9 @@ import ProtectedAdminRoute from './components/auth/ProtectedAdminRoute'
 import AdminHome from './components/pages/Admin/AdminHome'
 import AdminSport from './components/pages/Admin/AdminSport'
 import AdminInitial from './components/pages/Admin/AdminInitial'
+import AdminProCat from './components/pages/Admin/AdminProCat'
+import ProductCat from './components/pages/Admin/ProductCat'
+import AdminProductHome from './components/pages/Admin/AdminProductHome'
 
 function App() {
 
@@ -35,8 +38,14 @@ function App() {
         <Route element={<ProtectedAdminRoute/>}>
           <Route path='/admin' element={<AdminInitial />} >
             <Route index element={<AdminHome />}/>
-             <Route path='sportscategory' element={<AdminSport/>}/>
-
+              <Route path='sportscategory' element={<AdminSport/>}/>
+              <Route path='productcategory'>
+                  <Route index element={<AdminProCat/>} />
+                  <Route path=':sportId' element={<ProductCat/>} /> 
+              </Route>
+              <Route path='product'>
+                  <Route path=':catgoryId' element={<AdminProductHome/>} />
+              </Route> 
           </Route>
         </Route>
       </Routes>

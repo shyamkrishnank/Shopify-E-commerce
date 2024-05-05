@@ -34,7 +34,16 @@ function LoginForm() {
        navigate('/user')
     })
     .catch(error=>{
-      console.log(error)
+      toast.error(`${error.response.data.message}`, {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+        });
     })
    }
 
