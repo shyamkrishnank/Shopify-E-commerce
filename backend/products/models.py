@@ -23,6 +23,7 @@ class Products(models.Model):
     created_at = models.DateTimeField(auto_now=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    sport = models.ForeignKey(SportsCategory, on_delete=models.CASCADE,related_name='products')
     image1 = models.ImageField(upload_to='products/')
     image2 = models.ImageField(upload_to='products/', null=True)
 

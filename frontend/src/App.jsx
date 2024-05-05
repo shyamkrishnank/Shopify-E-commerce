@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import AuthRoute from './components/auth/AuthRoute'
-import InitialHome from './components/pages/Home/InitialHome'
+import InitialHome from './components/pages/User/InitialHome'
 import ProtectedAdminRoute from './components/auth/ProtectedAdminRoute'
 import AdminHome from './components/pages/Admin/AdminHome'
 import AdminSport from './components/pages/Admin/AdminSport'
@@ -16,6 +16,9 @@ import AdminInitial from './components/pages/Admin/AdminInitial'
 import AdminProCat from './components/pages/Admin/AdminProCat'
 import ProductCat from './components/pages/Admin/ProductCat'
 import AdminProductHome from './components/pages/Admin/AdminProductHome'
+import UserHome from './components/pages/User/UserHome'
+import Sports from './components/pages/User/Sports'
+import ProductDetial from './components/pages/User/ProductDetial'
 
 function App() {
 
@@ -33,6 +36,13 @@ function App() {
 
         <Route element={<ProtectedRoute/>} >
           <Route path='/user' element={<InitialHome />}>
+            <Route index element={<UserHome />}/>
+            <Route path='sports' >
+               <Route path=':sportId' element={<Sports />}/>
+            </Route>
+            <Route path='product'>
+              <Route path=':productId' element={<ProductDetial/>}/>
+            </Route>
           </Route>
         </Route>
         <Route element={<ProtectedAdminRoute/>}>

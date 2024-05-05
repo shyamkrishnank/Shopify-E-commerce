@@ -1,8 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
+from rest_framework.pagination import PageNumberPagination
 
-from .serializers import SportsCategorySerializer, CategorySerializer, ProductSerializer
+
+from .serializers import *
 from .models import SportsCategory, Category, Products
 
 
@@ -71,6 +73,8 @@ class AddProductView(APIView):
     def post(self,request, id):
         data = request.data
         data['category'] = id
+        sport = Category.objects.get(id = id).sport.id
+        data['sport'] = sport
         serializer = ProductSerializer(data = data)
         if serializer.is_valid():
             serializer.save()
@@ -80,6 +84,22 @@ class AddProductView(APIView):
             return Response({'message': "Invalid Datas"}, status=status.HTTP_400_BAD_REQUEST)
 
 
+#user product views
+class SetPage(PageNumberPagination):
+    page_size = 9
+class GetSportsProductView(generics.ListAPIView):
+        serializer_class = ProductBasicDetailsSerializer
+        def get_queryset(self):
+            id = self.kwargs['id']
+            sport = SportsCategory.objects.get(id=id)
+            return sport.products.all()
 
 
-
+class GetProductDetailsView(APIView):
+    def get(self,request,id):
+        try:
+            product = Products.objects.get(id=id)
+            serializer = ProductSerializer(product)
+            return Response({'message':'Success','product':serializer.data},status=status.HTTP_200_OK)
+        except:
+            return Response({'message':'Invalid Product'}, status=status.HTTP_400_BAD_REQUEST)

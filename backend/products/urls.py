@@ -9,6 +9,10 @@ urlpatterns = [
     path('addcategory/<uuid:id>', AddCategoryView.as_view()),
 
     path('getproducts/<uuid:id>', GetProductsView.as_view()),
-    path('addproducts/<uuid:id>', AddProductView.as_view())
+    path('addproducts/<uuid:id>', AddProductView.as_view()),
+
+#user
+    path('getsportproducts/<uuid:id>', GetSportsProductView.as_view()),
+    path('getproductdetails/<uuid:id>', GetProductDetailsView.as_view())
 
 ]

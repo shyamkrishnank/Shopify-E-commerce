@@ -2,5 +2,5 @@
 env
 frontend/node_modules
 backend/db.sqlite3
-migrations/*
+migrations
 backend/media
