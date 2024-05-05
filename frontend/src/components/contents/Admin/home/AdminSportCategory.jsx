@@ -20,6 +20,7 @@ function AdminSportCategory() {
     }
    
   const handleCloseModal = () =>{
+       setTitle()
        setImage()
        onClose()
      }
@@ -56,6 +57,10 @@ function AdminSportCategory() {
             progress: undefined,
             theme: "colored",
             })
+        setImage()
+        setTitle()
+
+
     })
     .catch(error=>{
         toast.error(`${error.response.data.message}`, {
@@ -128,7 +133,7 @@ function AdminSportCategory() {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Add Book</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Add Sports</ModalHeader>
               <ModalBody>
             <div >
               <Input type="text" size='lg' value={title} onChange={e=>setTitle(e.target.value)} label="Title" placeholder="Enter the title" />

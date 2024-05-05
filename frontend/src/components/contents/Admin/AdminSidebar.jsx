@@ -15,13 +15,13 @@ function AdminSidebar() {
         <div onClick={()=>navigate('/admin/sportscategory')} className="p-4 hover:cursor-pointer">
             <h3 className="text-lg font-semibold mb-2">Sports Categories</h3>
         </div>
-        <div className="p-4 border-t border-gray-300 hover:cursor-pointer">
+        <div onClick={()=>navigate('/admin/productcategory')} className="p-4 border-t border-gray-300 hover:cursor-pointer">
             <h3 className="text-lg font-semibold mb-2">Product Categories</h3>
         </div>
         <div className="p-4 border-t border-gray-300 hover:cursor-pointer">
             <h3 className="text-lg font-semibold mb-2">Products</h3>
         </div>
-        <div className='p-4 border-t border-gray-300 ' />
+        <div className='p-4 border-t border-gray-300 ' /> 
     </div>
       
     </div>
