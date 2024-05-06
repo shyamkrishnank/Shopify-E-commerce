@@ -19,6 +19,7 @@ import AdminProductHome from './components/pages/Admin/AdminProductHome'
 import UserHome from './components/pages/User/UserHome'
 import Sports from './components/pages/User/Sports'
 import ProductDetial from './components/pages/User/ProductDetial'
+import Cart from './components/pages/User/Cart'
 
 function App() {
 
@@ -42,6 +43,9 @@ function App() {
             </Route>
             <Route path='product'>
               <Route path=':productId' element={<ProductDetial/>}/>
+            </Route>
+            <Route path='cart'>
+               <Route index element={<Cart/>} />
             </Route>
           </Route>
         </Route>

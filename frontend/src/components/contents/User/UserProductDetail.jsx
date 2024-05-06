@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { axiosInstance } from '../axios/AxiosInterceptor'
 import { baseUrl } from '../Constants'
 import { Button, Image } from '@nextui-org/react'
+import { toast } from 'react-toastify'
 
 function UserProductDetail() {
     const {productId} = useParams()
@@ -20,6 +21,36 @@ function UserProductDetail() {
 
     },[])
 
+    const handleCart = (id) =>{
+       const data = {
+        "product":id
+       }
+       axiosInstance.post('order/addtocart/',data)
+       .then(response=>{
+        toast.success(`${response.data.message}`, {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+            })
+       })
+       .catch(error=>{
+        toast.error(`${error.response.data.message}`, {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+            })       })
+    }
+
   return (
     <div>
         {product?
@@ -36,7 +67,7 @@ function UserProductDetail() {
             <h1 className="text-4xl font-semibold mb-4">{product.title}</h1>
             <p className="text-gray-700 text-2xl mb-4">Category: {product.category.title}</p>
             <p className="text-gray-700 text-2xl mb-4">Price: Rs.{product.price}</p>
-             <Button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add to Cart</Button>
+             <Button onClick={()=>handleCart(product.id)} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add to Cart</Button>
             <h1 className='mt-8 font-semibold text-xl'>Product Information</h1>
              <div className='mt-4'><p className="text-gray-700  mb-4"> {product.description}</p> </div>
             
