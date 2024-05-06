@@ -5,6 +5,8 @@ urlpatterns = [
     path('addtocart/', AddToCartView.as_view()),
     path('getcart/', UserCartView.as_view()),
     path('addquantity/', AddQuantity.as_view()),
-    path('remove/<uuid:id>', RemoveCartItemView.as_view())
+    path('remove/<uuid:id>', RemoveCartItemView.as_view()),
+
+    path('checkout/', CheckoutDetailsView.as_view())
 
 ]
