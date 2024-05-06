@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'corsheaders',
     #custom apps
     'authApp',
-    'products'
+    'products',
+    'order'
 ]
 
 MIDDLEWARE = [
@@ -69,14 +70,12 @@ SIMPLE_JWT = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
-
-#pagination configurations
-REST_FRAMEWORK = {
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
 }
+
+#pagination configurations
 
 #cors allowed origins
 CORS_ALLOWED_ORIGINS = [

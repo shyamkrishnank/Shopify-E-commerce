@@ -85,6 +85,9 @@ function UserNav() {
          <DropdownItem  key="profile" color="success">
             My Profile
           </DropdownItem>
+          <DropdownItem onClick={()=>navigate('/user/cart')}  key="profile" color="success">
+            My Cart
+          </DropdownItem>
           <DropdownItem onClick={handleLogout} key="logout" color="danger">
             Log Out
           </DropdownItem>

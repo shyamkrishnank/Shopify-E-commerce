@@ -20,6 +20,11 @@ class ProductSerializer(ModelSerializer):
         model = Products
         fields = '__all__'
 
+class ProductSaveSerializer(ModelSerializer):
+    class Meta:
+        model = Products
+        fields = '__all__'
+
 
 #for user
 
