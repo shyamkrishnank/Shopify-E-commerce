@@ -41,3 +41,17 @@ class LoginView(APIView):
                 return Response({'message': 'Invalid Credentials'}, status=status.HTTP_406_NOT_ACCEPTABLE)
         except:
             return Response({'message': 'Please fill all fileds'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetUserDetailsView(APIView):
+    def get(self, request):
+        serializer = SignUpSerializer(request.user)
+        return Response({"message":'success',"user":serializer.data}, status=status.HTTP_200_OK )
+
+
+class AddAddressView(APIView):
+    def post(self,request):
+        user = CustomUser.objects.get(id = request.user.id)
+        user.address = request.data['address']
+        user.save()
+        return Response({'message':'Address Updated Succesfull'}, status=status.HTTP_200_OK)

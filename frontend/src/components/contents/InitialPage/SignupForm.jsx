@@ -13,6 +13,7 @@ function SignupForm() {
 
     const handleSubmit = () =>{
         if(username && email && password && conPassword){
+          if (password === conPassword){
             const data = {
                 'username' : username,
                 'email' :  email,
@@ -36,10 +37,32 @@ function SignupForm() {
             .catch(error=>{
               console.log(error)
             })
+          }
+          else{
+            toast.error('Wrong Password Entered', {
+              position: "top-center",
+              autoClose: 1500,
+              hideProgressBar: true,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+              })
+          }
 
         }
         else{
-            alert("Please fill all the fields")
+          toast.error('Please fill all the fields', {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+            })
         }
     }
 
