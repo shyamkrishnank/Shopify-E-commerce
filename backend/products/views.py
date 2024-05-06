@@ -75,7 +75,7 @@ class AddProductView(APIView):
         data['category'] = id
         sport = Category.objects.get(id = id).sport.id
         data['sport'] = sport
-        serializer = ProductSerializer(data = data)
+        serializer = ProductSaveSerializer(data = data)
         if serializer.is_valid():
             serializer.save()
             return Response({"message":serializer.data,"product": serializer.data}, status=status.HTTP_200_OK)
@@ -85,6 +85,7 @@ class AddProductView(APIView):
 
 
 #user product views
+
 class SetPage(PageNumberPagination):
     page_size = 9
 class GetSportsProductView(generics.ListAPIView):

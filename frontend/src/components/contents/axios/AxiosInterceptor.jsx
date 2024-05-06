@@ -1,5 +1,4 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const token = localStorage.getItem('auth_token')? JSON.parse(localStorage.getItem('auth_token')).access:null
 
