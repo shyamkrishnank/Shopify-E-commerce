@@ -82,7 +82,7 @@ function UserNav() {
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
-         <DropdownItem  key="profile" color="success">
+         <DropdownItem onClick={()=>navigate('/user/profile')}   key="profile" color="success">
             My Profile
           </DropdownItem>
           <DropdownItem onClick={()=>navigate('/user/cart')}  key="profile" color="success">

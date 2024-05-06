@@ -20,6 +20,8 @@ import UserHome from './components/pages/User/UserHome'
 import Sports from './components/pages/User/Sports'
 import ProductDetial from './components/pages/User/ProductDetial'
 import Cart from './components/pages/User/Cart'
+import ProfilePage from './components/pages/User/ProfilePage'
+import Checkout from './components/pages/User/Checkout'
 
 function App() {
 
@@ -46,6 +48,10 @@ function App() {
             </Route>
             <Route path='cart'>
                <Route index element={<Cart/>} />
+               <Route path="checkout" element={<Checkout />} />
+            </Route>
+            <Route path='profile'>
+               <Route index element={<ProfilePage/>} />
             </Route>
           </Route>
         </Route>

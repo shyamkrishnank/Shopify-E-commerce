@@ -3,11 +3,13 @@ import { axiosInstance } from '../axios/AxiosInterceptor'
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button} from "@nextui-org/react";
 import { baseUrl } from '../Constants';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 function UserCart() {
     const [cart, setCart] = useState()
     const [cartTotal, setCartTotal] = useState()
+    const navigate = useNavigate()
 
     useEffect(()=>{
         axiosInstance.get('order/getcart')
@@ -174,7 +176,7 @@ function UserCart() {
                     <span class="text-lg font-semibold">${cartTotal}</span>
                 </div>
                 <div className='mt-6  flex justify-center w-full'>
-                <Button variant='bordered' color="success">Proceed to Checkout</Button>
+                <Button onClick={()=>navigate('/user/cart/checkout')} variant='bordered' color="success">Proceed to Checkout</Button>
                 </div>
             </div>
         </div>

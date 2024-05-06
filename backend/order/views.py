@@ -71,6 +71,19 @@ class RemoveCartItemView(APIView):
         return Response({'message':'Product removed from cart','cartTotal':cart.total_price}, status=status.HTTP_200_OK)
 
 
+    #Checkout Api
+
+class CheckoutDetailsView( UserCartView, APIView):
+    def get(self, request):
+        productDetails = super().get(request)
+        user_address = request.user.address
+        productDetails.data['address'] = user_address
+        return Response(productDetails.data, status=status.HTTP_200_OK)
+
+
+
+
+
 
 
 
