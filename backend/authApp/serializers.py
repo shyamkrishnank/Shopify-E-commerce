@@ -20,3 +20,10 @@ class SignUpSerializer(serializers.ModelSerializer):
                                     )
 
         return user
+
+
+
+class UserBasicDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id','username','address',]

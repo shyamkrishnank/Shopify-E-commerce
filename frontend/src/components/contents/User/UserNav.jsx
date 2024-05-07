@@ -46,14 +46,14 @@ function UserNav() {
       </NavbarBrand>
       <NavbarContent  className="hidden sm:flex gap-12" justify="center">
        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <span className=' hover:cursor-pointer' onClick={()=>navigate('/user')} aria-current="page">
             Home
-          </Link>
+          </span>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <span className=' hover:cursor-pointer' aria-current="page">
              Shop
-          </Link>
+          </span>
         </NavbarItem>
         <NavbarItem isActive>
         <Dropdown>
