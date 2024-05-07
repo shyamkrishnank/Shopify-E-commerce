@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { axiosInstance } from '../axios/AxiosInterceptor'
 import { baseUrl } from '../Constants'
 import { Image } from '@nextui-org/react'
+import { useNavigate } from 'react-router-dom'
 
 function UserOrder() {
     const[orders, setOrders] = useState()
+    const navigate = useNavigate()
 
     useEffect(()=>{
         axiosInstance.get('order/getorders/')
@@ -26,7 +28,7 @@ function UserOrder() {
        {orders?.length ? 
        orders.map((order,index)=>{
         return (
-            <div class="bg-white shadow-md rounded-lg p-6 mb-6 hover:cursor-pointer">
+            <div onClick={()=>navigate(`/user/orders/${order.id}`)} class="bg-white shadow-md rounded-lg p-6 mb-6 hover:cursor-pointer">
             <div class="flex justify-between items-center mb-4">
                 <span class="text-zinc-900 font-semibold">Order id - {order.order_num}</span>
                 <span class="text-zinc-500">Order Payment Method: - {order.payment_type}</span>

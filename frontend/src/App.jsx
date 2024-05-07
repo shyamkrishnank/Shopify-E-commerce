@@ -23,6 +23,7 @@ import Cart from './components/pages/User/Cart'
 import ProfilePage from './components/pages/User/ProfilePage'
 import Checkout from './components/pages/User/Checkout'
 import Orders from './components/pages/User/Orders'
+import OrderDetails from './components/pages/User/OrderDetails'
 
 function App() {
 
@@ -45,7 +46,8 @@ function App() {
                <Route path=':sportId' element={<Sports />}/>
             </Route>
             <Route path='orders'>
-              <Route index element={<Orders/>} />
+               <Route index element={<Orders/>} />
+                <Route path=':orderId' element={<OrderDetails />} />
             </Route>
             <Route path='product'>
               <Route path=':productId' element={<ProductDetial/>}/>

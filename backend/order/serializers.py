@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer
 
 from .models import CartItems, OrderItems, Order
 from products.serializers import ProductSerializer, ProductBasicDetailsSerializer
+from authApp.serializers import UserBasicDetailSerializer
 
 
 class CartItemSerializer(ModelSerializer):
@@ -40,6 +41,7 @@ class OrderItemDetailSerializer(ModelSerializer):
 
 class OrderDetailsSerializer(ModelSerializer):
     orderitems = OrderItemDetailSerializer(many=True, read_only=True)
+    user = UserBasicDetailSerializer(read_only = True)
     class Meta:
         model = Order
         fields = '__all__'

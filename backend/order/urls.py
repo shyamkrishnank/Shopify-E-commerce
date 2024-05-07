@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('checkout/', CheckoutDetailsView.as_view()),
     path('confirmorder/', OrderConfirmView.as_view()),
-    path('getorders/', OrderUserSideView.as_view())
+    path('getorders/', OrderUserSideView.as_view()),
+    path('orderdetails/<uuid:id>', OrderDetailedView.as_view())
 
 ]

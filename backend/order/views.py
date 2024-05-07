@@ -125,6 +125,20 @@ class OrderUserSideView(APIView):
             return Response({'message':'Sorry something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class OrderDetailedView(APIView):
+    def get(self, request, id):
+        order = Order.objects.get(id = id)
+        serializer = OrderDetailsSerializer(order)
+        print(serializer.data)
+        return Response({'message':'success', 'order':serializer.data}, status=status.HTTP_200_OK)
+
+
+class InvoiceView(OrderDetailedView,APIView):
+    def get(self,request, id):
+        orders = super().get(request,id)
+        print(orders)
+
+
 
 
 
