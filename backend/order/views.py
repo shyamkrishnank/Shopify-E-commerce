@@ -4,7 +4,7 @@ from rest_framework import status
 
 
 from .models import Cart, CartItems
-from .serializers import CartItemSerializer, CartItemSaveSerializer
+from .serializers import *
 
 class AddToCartView(APIView):
     def post(self,request):
@@ -79,6 +79,44 @@ class CheckoutDetailsView( UserCartView, APIView):
         user_address = request.user.address
         productDetails.data['address'] = user_address
         return Response(productDetails.data, status=status.HTTP_200_OK)
+
+#Ordering
+
+class OrderConfirmView(APIView):
+    def get(self, request):
+        try:
+            user = request.user
+            cart = Cart.objects.get(user = request.user)
+            data = {
+                'user':user.id,
+                 'total_price':cart.total_price
+            }
+            order_serializer = OrderSaveSerializer(data=data)
+            if order_serializer.is_valid():
+                order_serializer.save()
+            cartItems = cart.cartitems.all()
+            print(order_serializer.data)
+            for item in cartItems:
+                data = {
+                    'order':order_serializer.data['id'],
+                    'product':item.product.id,
+                    'quantity':item.quantity
+                }
+                orderitem_serializer = OrderItemSerializer(data = data)
+                if orderitem_serializer.is_valid():
+                    orderitem_serializer.save()
+            cartItems.delete()
+            return Response({'message':'Order Confirmed Succesfully', 'order_num':order_serializer.data['order_num']}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            print(e)
+            return Response({'message':'Order Not Confirmed'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
 
 
 

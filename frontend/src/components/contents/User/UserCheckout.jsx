@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../axios/AxiosInterceptor'
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Button} from "@nextui-org/react";
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Image} from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+
 import { toast } from 'react-toastify';
 
 
@@ -9,7 +11,10 @@ function UserCheckout() {
     const [products, setProducts] = useState()
     const [address, setAddress] = useState()
     const [total, setTotal] = useState()
+    const [orderNum, setOrderNum] = useState()
     const navigate = useNavigate()
+    const {isOpen, onOpen, onClose} = useDisclosure();
+
 
     useEffect(()=>{
         axiosInstance.get('order/checkout/')
@@ -39,8 +44,23 @@ function UserCheckout() {
         }
 
         else{
+            axiosInstance.get('order/confirmorder/')
+            .then(response=>{
+                console.log(response.data)
+                setOrderNum(response.data.order_num)
+                onOpen()
+
+            })
+            .catch(error=>{
+                console.log(error)
+            })
             
         }
+    }
+
+    const handleClose = () =>{
+        onClose()
+        navigate('/user/cart')
     }
 
     
@@ -98,6 +118,43 @@ function UserCheckout() {
                 :
           <div className='w-full flex justify-center mt-20'><h1 className='text-xl'>Nothing there in Cart to Checkout</h1></div>
         }
+       <Modal 
+        size={"5xl"} 
+        isOpen={isOpen} 
+        onClose={handleClose} 
+      >
+        <ModalContent>
+          {(onClose) => (
+              <>
+              <ModalHeader className="flex flex-col gap-1 text-green-600 font-serif text-3xl font-bold text-center">Order Confirmed</ModalHeader>
+              <ModalBody >
+                <div className='flex flex-col'>
+                   <div className='grid'>
+                        <div className='justify-self-center'>
+                            <Image width={200} src={"https://i.pinimg.com/564x/6e/da/23/6eda233c614a370d2808b04041de791f.jpg"} />
+                        </div>
+                    </div>
+                    <div className='grid'>
+                        <div className='justify-self-center'>
+                            <h1 className='font-bold text-green-600 '>Thank you for your order. We have received your order and <br/>it will be processed soon.</h1>
+                        </div>
+                    </div>
+                    <div className='grid'>
+                        <div className='justify-self-center'>
+                            <h1 className='font-bold text-sm drop-shadow-lg text-green-600 '>Your Order Number is : <span className='text-red-500'>{orderNum}</span> </h1>
+                        </div>
+                    </div>
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button  color="primary" onPress={()=>navigate('/user/mylearning')}>
+                  View Orders
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   )
 }
