@@ -33,7 +33,7 @@ def generate_order_id():
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    ordered_created = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now=True)
     order_num = models.CharField(max_length=20, default=generate_order_id())
     payment_type = models.CharField(max_length=100, default="CASH ON DELIVERY")
     status = models.CharField(max_length=100, default='Order Confirmed')
