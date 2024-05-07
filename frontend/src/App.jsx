@@ -22,6 +22,7 @@ import ProductDetial from './components/pages/User/ProductDetial'
 import Cart from './components/pages/User/Cart'
 import ProfilePage from './components/pages/User/ProfilePage'
 import Checkout from './components/pages/User/Checkout'
+import Orders from './components/pages/User/Orders'
 
 function App() {
 
@@ -42,6 +43,9 @@ function App() {
             <Route index element={<UserHome />}/>
             <Route path='sports' >
                <Route path=':sportId' element={<Sports />}/>
+            </Route>
+            <Route path='orders'>
+              <Route index element={<Orders/>} />
             </Route>
             <Route path='product'>
               <Route path=':productId' element={<ProductDetial/>}/>

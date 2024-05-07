@@ -113,6 +113,18 @@ class OrderConfirmView(APIView):
             return Response({'message':'Order Not Confirmed'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class OrderUserSideView(APIView):
+    def get(self, request):
+        try:
+            user = request.user
+            order = Order.objects.filter(user = user).order_by('-created_at')
+            serializer = OrderDetailsSerializer(order, many=True)
+            return Response({'message':'success','orders':serializer.data}, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response({'message':'Sorry something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 
