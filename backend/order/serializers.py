@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import CartItems, OrderItems, Order
+from .models import CartItems, OrderItems, Order, Invoice
 from products.serializers import ProductSerializer, ProductBasicDetailsSerializer
 from authApp.serializers import UserBasicDetailSerializer
 
@@ -44,4 +44,10 @@ class OrderDetailsSerializer(ModelSerializer):
     user = UserBasicDetailSerializer(read_only = True)
     class Meta:
         model = Order
+        fields = '__all__'
+
+
+class InvoiceSerializer(ModelSerializer):
+    class Meta:
+        model = Invoice
         fields = '__all__'

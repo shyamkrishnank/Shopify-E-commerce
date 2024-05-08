@@ -28,7 +28,7 @@ function UserOrder() {
        {orders?.length ? 
        orders.map((order,index)=>{
         return (
-            <div onClick={()=>navigate(`/user/orders/${order.id}`)} class="bg-white shadow-md rounded-lg p-6 mb-6 hover:cursor-pointer">
+            <div key={index} onClick={()=>navigate(`/user/orders/${order.id}`)} class="bg-white shadow-md rounded-lg p-6 mb-6 hover:cursor-pointer">
             <div class="flex justify-between items-center mb-4">
                 <span class="text-zinc-900 font-semibold">Order id - {order.order_num}</span>
                 <span class="text-zinc-500">Order Payment Method: - {order.payment_type}</span>

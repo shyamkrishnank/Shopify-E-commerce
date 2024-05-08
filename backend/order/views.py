@@ -1,10 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.http import HttpResponse
+from io import BytesIO
 
 
-from .models import Cart, CartItems
+
+
+from .models import Cart, CartItems, Invoice
 from .serializers import *
+from .invoice import generate_invoice_pdf
 
 class AddToCartView(APIView):
     def post(self,request):
@@ -135,8 +140,22 @@ class OrderDetailedView(APIView):
 
 class InvoiceView(OrderDetailedView,APIView):
     def get(self,request, id):
-        orders = super().get(request,id)
-        print(orders)
+        order = super().get(request,id)
+        invoice,created = Invoice.objects.get_or_create(order=Order.objects.get(id=id))
+        order.data['order']['invoice_num'] = invoice.invoice_number
+        if created:
+            buffer = BytesIO()
+            generate_invoice_pdf(order.data['order'], buffer)
+            invoice.invoice_pdf.save(f"invoice{invoice.invoice_number}.pdf", buffer)
+            invoice.save()
+            buffer.close()
+
+        response = HttpResponse(invoice.invoice_pdf, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{invoice.invoice_pdf.name}"'
+        return response
+
+
+
 
 
 
