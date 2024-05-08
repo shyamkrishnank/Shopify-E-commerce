@@ -7,6 +7,8 @@ import { baseUrl } from '../Constants'
 function UserOrderDetails() {
     const {orderId} = useParams()
     const [orderDetails, setOrderDetails] = useState()
+    const [pdfData, setPDFData] = useState(null);
+
 
     useEffect(()=>{
         axiosInstance.get(`order/orderdetails/${orderId}`)
@@ -17,8 +19,21 @@ function UserOrderDetails() {
         .catch(error=>{
             console.log(error)
         })
-
     },[])
+
+    const handleInvoice = (id) =>{
+        axiosInstance(`order/getinvoice/${id}`)
+        .then(response=>{
+            const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            setPDFData(pdfUrl);
+            window.open(pdfUrl, '_blank', 'fullscreen=yes');
+
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    }
 
   return (
     <div>
@@ -38,7 +53,7 @@ function UserOrderDetails() {
             <div class="flex items-center mb-4">
                 <span>Download Invoice</span>
             </div>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button onClick={()=>handleInvoice(orderDetails.id)} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Download
             </button>
         </div>

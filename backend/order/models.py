@@ -54,6 +54,6 @@ def generate_invoice_num():
 class Invoice(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='invoice')
-    invoice_pdf = models.FileField(upload_to='invoice/')
+    invoice_pdf = models.FileField(upload_to='invoice/',null=True)
     invoice_number = models.CharField(max_length=20 , default=generate_invoice_num())
 
