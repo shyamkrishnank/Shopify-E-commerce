@@ -18,8 +18,8 @@ function AdminSidebar() {
         <div onClick={()=>navigate('/admin/productcategory')} className="p-4 border-t border-gray-300 hover:cursor-pointer">
             <h3 className="text-lg font-semibold mb-2">Product Categories</h3>
         </div>
-        <div className="p-4 border-t border-gray-300 hover:cursor-pointer">
-            <h3 className="text-lg font-semibold mb-2">Products</h3>
+        <div onClick={()=>navigate('/admin/orders')} className="p-4 border-t border-gray-300 hover:cursor-pointer">
+            <h3 className="text-lg font-semibold mb-2">Orders</h3>
         </div>
         <div className='p-4 border-t border-gray-300 ' /> 
     </div>

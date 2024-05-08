@@ -24,6 +24,9 @@ import ProfilePage from './components/pages/User/ProfilePage'
 import Checkout from './components/pages/User/Checkout'
 import Orders from './components/pages/User/Orders'
 import OrderDetails from './components/pages/User/OrderDetails'
+import OrdersPage from './components/pages/Admin/OrdersPage'
+import AdminOrderDetails from './components/pages/Admin/AdOrderDetails'
+import AdOrderDetails from './components/pages/Admin/AdOrderDetails'
 
 function App() {
 
@@ -72,6 +75,11 @@ function App() {
               <Route path='product'>
                   <Route path=':catgoryId' element={<AdminProductHome/>} />
               </Route> 
+              <Route path='orders' >
+                <Route index element={<OrdersPage />} />
+                <Route path=':orderId' element={<AdOrderDetails />}/>
+              </Route>
+
           </Route>
         </Route>
       </Routes>

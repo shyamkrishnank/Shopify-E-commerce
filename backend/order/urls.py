@@ -13,4 +13,6 @@ urlpatterns = [
     path('orderdetails/<uuid:id>', OrderDetailedView.as_view()),
     path('getinvoice/<uuid:id>', InvoiceView.as_view()),
 
+    path('allorders/', AllOrdersView.as_view())
+
 ]

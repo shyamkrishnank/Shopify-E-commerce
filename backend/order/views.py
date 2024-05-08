@@ -154,19 +154,14 @@ class InvoiceView(OrderDetailedView,APIView):
         response['Content-Disposition'] = f'attachment; filename="{invoice.invoice_pdf.name}"'
         return response
 
+#Admin Orders Views
 
 
-
-
-
-
-
-
-
-
-
-
-
+class AllOrdersView(APIView):
+    def get(self, request):
+        orders = Order.objects.all()
+        serializer = OrderDetailsSerializer(orders, many=True)
+        return Response({'message':'success','orders':serializer.data}, status=status.HTTP_200_OK)
 
 
 
