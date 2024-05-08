@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { axiosInstance } from '../../axios/AxiosInterceptor'
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button} from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -23,7 +23,9 @@ function AdminOrders() {
   return (
     <div>
         {orders?.length ?
-    <div className='mx-5 mt-12'>
+        <>
+     <div className='flex w-full justify-end'><Button>Generate CSV</Button></div>
+    <div className='mx-5 mt-6'>
      <Table aria-label="Example static collection table">
       <TableHeader>
         <TableColumn>No.</TableColumn>
@@ -50,6 +52,7 @@ function AdminOrders() {
       </TableBody>
     </Table>
     </div>
+    </>
     :
     <div className='flex justify-center w-full mt-12'>
         <h1 className='text-2xl'>No Orders Yet!</h1>
