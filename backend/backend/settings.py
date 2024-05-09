@@ -104,6 +104,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #Changed the django User to CustomUser
 AUTH_USER_MODEL = 'authApp.CustomUser'
 
+#Celery Broker url
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/kolkata'
 
 
 # Database
@@ -141,11 +148,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/kolkata'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -161,3 +168,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#mail sending configuraion
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'sportifyecommerce018@gmail.com'
+EMAIL_HOST_PASSWORD = 'aorjltuhgeyviszb'

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { axiosInstance } from '../../axios/AxiosInterceptor'
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button} from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 function AdminOrders() {
@@ -20,11 +21,30 @@ function AdminOrders() {
 
     },[])
 
+    const handleCSV = () =>{
+        axiosInstance.get('order/generatecsv/')
+        .then(response=>{
+            toast.success(`${response.data.message}`, {
+                position: "top-center",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+                })
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    }
+
   return (
     <div>
         {orders?.length ?
         <>
-     <div className='flex w-full justify-end'><Button>Generate CSV</Button></div>
+     <div className='flex w-full justify-end pr-8'><Button color="success" onClick={()=>handleCSV()} >Generate CSV</Button></div>
     <div className='mx-5 mt-6'>
      <Table aria-label="Example static collection table">
       <TableHeader>

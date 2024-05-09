@@ -4,12 +4,10 @@ from rest_framework import status
 from django.http import HttpResponse
 from io import BytesIO
 
-
-
-
 from .models import Cart, CartItems, Invoice
 from .serializers import *
 from .invoice import generate_invoice_pdf
+from .tasks import generate_csv
 
 class AddToCartView(APIView):
     def post(self,request):
@@ -155,13 +153,19 @@ class InvoiceView(OrderDetailedView,APIView):
         return response
 
 #Admin Orders Views
-
-
 class AllOrdersView(APIView):
     def get(self, request):
         orders = Order.objects.all()
         serializer = OrderDetailsSerializer(orders, many=True)
         return Response({'message':'success','orders':serializer.data}, status=status.HTTP_200_OK)
+
+
+class Generate_CSV_View(APIView):
+    def get(self, request):
+        print('celery started')
+        generate_csv.delay() #celery task
+        return Response({'message':'CSV will be send to the provided mail id'}, status=status.HTTP_200_OK)
+
 
 
 
