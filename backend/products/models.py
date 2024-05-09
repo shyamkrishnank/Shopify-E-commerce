@@ -1,12 +1,13 @@
 from django.db import models
 import uuid
-from datetime import datetime,timedelta
+from PIL import Image
 
 
 class SportsCategory(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to="sports/")
+
 
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)

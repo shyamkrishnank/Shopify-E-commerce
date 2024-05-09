@@ -27,7 +27,6 @@ function UserNav() {
     localStorage.removeItem('auth_token')
     localStorage.removeItem('is_admin')
     axiosInstance.defaults.headers['Authorization'] = null
-    axiosInstance.defaults.headers['Refresh-token'] = null
     dispatch(logout())
     navigate('/')
 
@@ -51,7 +50,7 @@ function UserNav() {
           </span>
         </NavbarItem>
         <NavbarItem isActive>
-          <span className=' hover:cursor-pointer' aria-current="page">
+          <span className=' hover:cursor-pointer'onClick={()=>navigate('/user/sports')}  aria-current="page">
              Shop
           </span>
         </NavbarItem>

@@ -21,10 +21,15 @@ axiosInstance.interceptors.response.use((response)=>{
         axiosInstance.defaults.headers['Authorization'] = `Bearer ${response.data.tokens.access}`
         return response
     }
+    console.log(response)
     return response
 
 },
 (error)=>{
+    if(error.response.status == 401){
+        localStorage.removeItem('auth_token')
+        axiosInstance.defaults.headers['Authorization'] = null
+    }
         return Promise.reject(error)
 }
 )

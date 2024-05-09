@@ -88,12 +88,21 @@ class AddProductView(APIView):
 
 class SetPage(PageNumberPagination):
     page_size = 9
+
 class GetSportsProductView(generics.ListAPIView):
         serializer_class = ProductBasicDetailsSerializer
+        pagination_class = SetPage
         def get_queryset(self):
             id = self.kwargs['id']
             sport = SportsCategory.objects.get(id=id)
             return sport.products.all()
+
+
+class GetAllProductsView(generics.ListAPIView):
+    serializer_class = ProductBasicDetailsSerializer
+    queryset = Products.objects.all()
+    pagination_class = SetPage
+
 
 
 class GetProductDetailsView(APIView):

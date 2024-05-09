@@ -4,3 +4,4 @@ frontend/node_modules
 backend/db.sqlite3
 migrations
 backend/media
+backend/.env

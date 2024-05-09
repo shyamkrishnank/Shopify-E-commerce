@@ -9,10 +9,11 @@ function UserSports() {
     const [products, setProducts] = useState()
     const navigate = useNavigate()
 
+    if (sportId){
     useEffect(()=>{
         axiosInstance.get(`products/getsportproducts/${sportId}`)
         .then(response=>{
-            console.log(response.data.result)
+            console.log(response.data.results)
             setProducts(response.data.results)
         })
         .catch(error=>{
@@ -20,20 +21,35 @@ function UserSports() {
         })
 
     },[sportId])
+}
+else{
+    useEffect(()=>{
+        axiosInstance.get(`products/getallproducts/`)
+        .then(response=>{
+            console.log(response.data.results)
+            setProducts(response.data.results)
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    
+    },[sportId])
+}
 
   return (
     <div>
-        <div  class="flex flex-wrap w-full gap-5 my-9 mx-6">
+        <div  className="gap-2 grid grid-cols-2 sm:grid-cols-4 mx-6">
         {products?.length?
         products.map((product,i)=>{
             return(
-                <div onClick={()=>navigate(`/user/product/${product.id}`)} key={i} className='basis-1/6 h-56 hover:cursor-pointer'>
-                    <div class="max-w-sm border rounded overflow-hidden shadow-lg">
-                    <img class="w-full" src={product.image1} alt="Product Image"/>
-                    <div class="px-6 py-4">
-                        <p class="text-gray-700 text-base mb-2">Category</p>
-                        <div class="font-bold text-md mb-2">{product.title}</div>
-                        <p class="text-sky-500 hover:text-green-600 text-base mb-2">Rs.{product.price}</p>
+                <div onClick={()=>navigate(`/user/product/${product.id}`)} key={i} className=' hover:cursor-pointer'>
+                    <div className="max-w-sm border rounded overflow-hidden shadow-lg">
+                    <img className="w-full" src={product.image1} alt="Product Image"/>
+                    <div className="px-6 py-4">
+                        <div className="font-bold text-md mb-2">{product.title}</div>
+                        <p className="text-sky-500 hover:text-green-600 text-base mb-2">Rs.{product.price}</p>
+                        {product.stock == 0 && <p className='text-red-500'>Out of Stock</p>}
+                        {product.stock < 3 && product.stock > 0 && <p className='text-red-500'>Limited Stock Available</p> }
                     </div>
                     </div>
                 </div>
