@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { logged } from '../../../Slices/AuthSlice';
+import UnAuthorizedModal from './UnAuthorizedModal';
 
 
 function LoginForm() {
@@ -18,6 +19,7 @@ function LoginForm() {
       'username':username,
       'password':password
     }
+    if (username && password){
     axiosInstance.post('/auth/login/',data )
     .then(response=>{
       dispatch(logged())
@@ -45,6 +47,20 @@ function LoginForm() {
         theme: "colored",
         });
     })
+     }
+     else{
+      toast.error('Please fill all fields', {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+        });
+
+     }
    }
 
 
@@ -77,7 +93,6 @@ function LoginForm() {
                       </div>
                     </div>
             </div>
-          
         </div>
       )
     }

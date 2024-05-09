@@ -25,11 +25,9 @@ import Checkout from './components/pages/User/Checkout'
 import Orders from './components/pages/User/Orders'
 import OrderDetails from './components/pages/User/OrderDetails'
 import OrdersPage from './components/pages/Admin/OrdersPage'
-import AdminOrderDetails from './components/pages/Admin/AdOrderDetails'
 import AdOrderDetails from './components/pages/Admin/AdOrderDetails'
 
 function App() {
-
   return (
     <>
      <Router>
@@ -41,11 +39,11 @@ function App() {
           <Route path='signup' element={<SignupPage />} />
         </Route>
         </Route>
-
         <Route element={<ProtectedRoute/>} >
           <Route path='/user' element={<InitialHome />}>
             <Route index element={<UserHome />}/>
             <Route path='sports' >
+               <Route index element={<Sports/>} />
                <Route path=':sportId' element={<Sports />}/>
             </Route>
             <Route path='orders'>
@@ -79,7 +77,6 @@ function App() {
                 <Route index element={<OrdersPage />} />
                 <Route path=':orderId' element={<AdOrderDetails />}/>
               </Route>
-
           </Route>
         </Route>
       </Routes>

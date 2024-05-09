@@ -98,7 +98,6 @@ class OrderConfirmView(APIView):
             if order_serializer.is_valid():
                 order_serializer.save()
             cartItems = cart.cartitems.all()
-            print(order_serializer.data)
             for item in cartItems:
                 data = {
                     'order':order_serializer.data['id'],
@@ -108,6 +107,9 @@ class OrderConfirmView(APIView):
                 orderitem_serializer = OrderItemSerializer(data = data)
                 if orderitem_serializer.is_valid():
                     orderitem_serializer.save()
+                product = item.product
+                product.stock = product.stock - item.quantity
+                product.save()
             cartItems.delete()
             return Response({'message':'Order Confirmed Succesfully', 'order_num':order_serializer.data['order_num']}, status=status.HTTP_200_OK)
 
@@ -161,9 +163,9 @@ class AllOrdersView(APIView):
 
 
 class Generate_CSV_View(APIView):
-    def get(self, request):
+    def post(self, request):
         print('celery started')
-        generate_csv.delay() #celery task
+        generate_csv.delay(request.data['mail']) #celery task
         return Response({'message':'CSV will be send to the provided mail id'}, status=status.HTTP_200_OK)
 
 

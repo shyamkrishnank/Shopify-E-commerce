@@ -99,7 +99,6 @@ function SignupForm() {
                   </div>
                 </div>
         </div>
-      
     </div>
   )
 }

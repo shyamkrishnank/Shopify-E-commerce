@@ -67,7 +67,11 @@ function UserProductDetail() {
             <h1 className="text-4xl font-semibold mb-4">{product.title}</h1>
             <p className="text-gray-700 text-2xl mb-4">Category: {product.category.title}</p>
             <p className="text-gray-700 text-2xl mb-4">Price: Rs.{product.price}</p>
-             <Button onClick={()=>handleCart(product.id)} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add to Cart</Button>
+            {product.stock > 0 ?
+              <Button onClick={()=>handleCart(product.id)} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add to Cart</Button>  
+            :
+            <Button isDisabled color="danger" >Out of Stock</Button>
+            }
             <h1 className='mt-8 font-semibold text-xl'>Product Information</h1>
              <div className='mt-4'><p className="text-gray-700  mb-4"> {product.description}</p> </div>
             

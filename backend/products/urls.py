@@ -9,6 +9,7 @@ urlpatterns = [
     path('addcategory/<uuid:id>', AddCategoryView.as_view()),
 
     path('getproducts/<uuid:id>', GetProductsView.as_view()),
+    path('getallproducts/', GetAllProductsView.as_view()),
     path('addproducts/<uuid:id>', AddProductView.as_view()),
 
 #user
